@@ -19,6 +19,26 @@ struct node {
 	struct node *next;
 };
 
-int linkedListMedian(struct node *head) {
-	return -1;
+int linkedListMedian(struct node *head) 
+{
+	if (head == NULL)
+		return -1;
+	struct node *slow_ptr1 = head;
+	struct node *slow_ptr2 = head;
+	struct node *fast_ptr = head;
+
+	if (head != NULL)
+	{
+		while (fast_ptr != NULL && fast_ptr->next != NULL)
+		{
+			fast_ptr = fast_ptr->next->next;
+			slow_ptr1 = slow_ptr2;
+			slow_ptr2 = slow_ptr2->next;
+		}
+	//	printf("The middle element is [%d]\n\n", slow_ptr->num);
+		if (fast_ptr == NULL)
+			return (slow_ptr1->num + slow_ptr2->num) / 2;
+		else
+			return slow_ptr2->num;
+	}
 }
